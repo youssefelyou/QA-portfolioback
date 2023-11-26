@@ -41,8 +41,11 @@ public class AuthenticationService {
             var savedUser = repository.save(user);
             var jwtToken = jwtService.generateToken(user);
             var refreshToken = jwtService.generateRefreshToken(user);
+            String jsonString = String.valueOf(user.getRole());
             saveUserToken(savedUser, jwtToken);
-            return AuthenticationResponse.builder().accessToken(jwtToken).refreshToken(refreshToken).build();
+            return AuthenticationResponse.builder().accessToken(jwtToken)
+                    .role(jsonString)
+                    .refreshToken(refreshToken).build();
         }
 
 
