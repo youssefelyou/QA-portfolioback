@@ -1,5 +1,6 @@
 package com.example.portfolio.service;
 
+import com.example.portfolio.bean.Role;
 import com.example.portfolio.bean.User;
 import com.example.portfolio.dao.UserDao;
 import jakarta.transaction.Transactional;
@@ -22,12 +23,24 @@ public class UserService {
         return userDao.save(user);
     }
 
-    public Optional<User> findById(Long id) {
+    public Optional<User> findById(Integer id) {
         return userDao.findById(id);
     }
 
     @Transactional
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
         userDao.deleteById(id);
+    }
+
+    public User findUserByUsername(String username) {
+        return userDao.findUserByUsername(username);
+    }
+
+    public Optional<User> findByEmail(String email) {
+        return userDao.findByEmail(email);
+    }
+
+    public List<User> findByRole(Role role) {
+        return userDao.findByRole(role);
     }
 }

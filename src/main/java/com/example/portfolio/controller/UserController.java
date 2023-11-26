@@ -1,5 +1,6 @@
 package com.example.portfolio.controller;
 
+import com.example.portfolio.bean.Role;
 import com.example.portfolio.bean.User;
 import com.example.portfolio.service.UserService;
 import jakarta.transaction.Transactional;
@@ -27,13 +28,29 @@ public class UserController {
     }
 
     @GetMapping("/find/{id}")
-    public Optional<User> findById(@PathVariable Long id) {
+    public Optional<User> findById(@PathVariable Integer id) {
         return userService.findById(id);
     }
 
     @Transactional
     @DeleteMapping("/delete/{id}")
-    public void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable Integer id) {
         userService.deleteById(id);
+    }
+
+    @GetMapping("/username/{username}")
+    public User findUserByUsername(@PathVariable String username) {
+        return userService.findUserByUsername(username);
+    }
+
+    @GetMapping("/email/{email}")
+    public Optional<User> findByEmail(@PathVariable String email) {
+        return userService.findByEmail(email);
+
+    }
+
+    @GetMapping("/role/{role}")
+    public List<User> findByRole(@PathVariable Role role) {
+        return userService.findByRole(role);
     }
 }
